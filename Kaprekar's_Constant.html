@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Kaprekar's constant</title>
+</head>
+<body>
+</body>
+<script>
+let arrangedNumbers = [0, 0];
+let workingNumber = [0, 0, 0, 0];
+let workingDigits = [0, 0, 0, 0]
+let currentNumber = 7283; //edit this to change the starting number
+let selectedDigit = 0;
+let rounds = 0;
+while (currentNumber != 6174) {
+rounds++;
+for (let i = 0; i < 2; i++) { //sorting the biggest AND smallest number
+workingNumber = [0, 0, 0, 0];
+for (let y = 0; y < 4; y++) {
+workingDigits[y] = parseInt((currentNumber.toString()).substring(y, y+1));
+}
+for (let x = 0; x < 4; x++) { // finding the biggest number
+if (i === 0) {
+selectedDigit = -1;
+} else {
+selectedDigit = 10;
+}
+for (let j = 0; j < workingDigits.length; j++) { //finding the current largest digit
+if (i === 0) {
+if (selectedDigit < workingDigits[j]) {
+selectedDigit = workingDigits[j];
+}
+} else {
+if (selectedDigit > workingDigits[j]) {
+selectedDigit = workingDigits[j];
+}
+}
+}
+workingDigits.splice(workingDigits.indexOf(selectedDigit), 1);
+workingNumber[x] = selectedDigit;
+}
+selectedDigit = "";
+for (let y = 0; y < 4; y++) {
+selectedDigit = selectedDigit + workingNumber[y].toString();
+}
+arrangedNumbers[i] = parseInt(selectedDigit);
+}
+currentNumber = arrangedNumbers[0] - arrangedNumbers[1];
+console.log(currentNumber);
+}
+console.log(rounds);
+</script>
+</html>
